@@ -54,6 +54,15 @@ keys.globalkeys =
         end,
         {description = "open a file manager", group = "launcher"}
     ),
+    awful.key(
+        {modkey},
+        "Escape",
+        function()
+            -- emit signal to show the exit screen
+            awesome.emit_signal("show_exit_screen")
+        end,
+        {description = "toggle exit screen", group = "hotkeys"}
+    ),
     awful.key({modkey, ctrlkey}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
     awful.key({ctrlkey, altkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
     awful.key(

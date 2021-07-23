@@ -13,6 +13,9 @@ local beautiful = require("beautiful")
 -- Import Notifications Appearance
 require("components.notifications")
 
+-- Import Lock Scren
+require("components.exit-screen")
+
 -- Import Top Panel
 local top_panel = require("components.top-panel")
 
