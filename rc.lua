@@ -9,7 +9,6 @@ require("awful.autofocus")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
@@ -61,7 +60,7 @@ awful.screen.connect_for_each_screen(
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.viewprev)))
+root.buttons(gears.table.join(awful.button({}, 5, awful.tag.viewnext), awful.button({}, 4, awful.tag.viewprev)))
 -- }}}
 
 -- {{{ Key bindings
