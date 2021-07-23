@@ -15,6 +15,7 @@ theme.name = "Default"
 
 -- Font
 theme.font = "Noto Sans 8"
+theme.title_font = "Noto Sans Medium 10"
 
 -- background
 theme.bg_normal = "#1f2430"

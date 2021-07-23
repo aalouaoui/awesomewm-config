@@ -18,6 +18,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+-- Import Notifications Appearance
+require("components.notifications")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -803,3 +806,10 @@ client.connect_signal(
     end
 )
 -- }}}
+
+-- ===================================================================
+-- Garbage collection (allows for lower memory consumption)
+-- ===================================================================
+
+collectgarbage("setpause", 110)
+collectgarbage("setstepmul", 1000)
