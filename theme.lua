@@ -135,7 +135,7 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "titlebar/maximi
 theme.titlebar_maximized_button_normal_active = themes_path .. "titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path .. "background.png"
+theme.wallpaper = themes_path .. "background.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_floating = themes_path .. "layouts/floating.png"
@@ -147,3 +147,4 @@ theme.layout_tile = themes_path .. "layouts/tiled.png"
 theme.icon_theme = "Tela-dark"
 
 return theme
+
