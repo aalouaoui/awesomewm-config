@@ -55,8 +55,6 @@ awful.screen.connect_for_each_screen(
         -- Each screen has its own tag table.
         awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
 
-        -- Create a promptbox for each screen
-        s.mypromptbox = awful.widget.prompt()
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
         -- We need one layoutbox per screen.
         s.mylayoutbox = awful.widget.layoutbox(s)
@@ -191,8 +189,7 @@ awful.screen.connect_for_each_screen(
             {
                 -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
-                s.mytaglist,
-                s.mypromptbox
+                s.mytaglist
             },
             {
                 -- Middle widget
@@ -371,32 +368,10 @@ globalkeys =
         end,
         {description = "restore minimized", group = "client"}
     ),
-    -- Prompt
-    awful.key(
-        {modkey},
-        "r",
-        function()
-            awful.screen.focused().mypromptbox:run()
-        end,
-        {description = "run prompt", group = "launcher"}
-    ),
-    awful.key(
-        {modkey},
-        "x",
-        function()
-            awful.prompt.run {
-                prompt = "Run Lua code: ",
-                textbox = awful.screen.focused().mypromptbox.widget,
-                exe_callback = awful.util.eval,
-                history_path = awful.util.get_cache_dir() .. "/history_eval"
-            }
-        end,
-        {description = "lua execute prompt", group = "awesome"}
-    ),
     -- Menubar
     awful.key(
         {modkey},
-        "p",
+        "r",
         function()
             menubar.show()
         end,
