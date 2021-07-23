@@ -86,11 +86,6 @@ theme.titlebars_enabled = false
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 
--- Generate taglist squares:
-local taglist_square_size = dpi(8)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
-
 -- Variables set for theming notifications:
 -- notification_font
 -- notification_[bg|fg]
@@ -147,4 +142,3 @@ theme.layout_tile = themes_path .. "layouts/tiled.png"
 theme.icon_theme = "Tela-dark"
 
 return theme
-
