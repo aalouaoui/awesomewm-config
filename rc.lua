@@ -45,9 +45,6 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
-mymainmenu = awful.menu({})
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -216,19 +213,7 @@ awful.screen.connect_for_each_screen(
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(
-    gears.table.join(
-        awful.button(
-            {},
-            3,
-            function()
-                mymainmenu:toggle()
-            end
-        ),
-        awful.button({}, 4, awful.tag.viewnext),
-        awful.button({}, 5, awful.tag.viewprev)
-    )
-)
+root.buttons(gears.table.join(awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.viewprev)))
 -- }}}
 
 -- {{{ Key bindings
@@ -253,14 +238,6 @@ globalkeys =
             awful.client.focus.byidx(-1)
         end,
         {description = "focus previous by index", group = "client"}
-    ),
-    awful.key(
-        {modkey},
-        "w",
-        function()
-            mymainmenu:show()
-        end,
-        {description = "show main menu", group = "awesome"}
     ),
     -- Layout manipulation
     awful.key(
