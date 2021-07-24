@@ -178,7 +178,8 @@ exit_screen.widget =
       ontop = true,
       type = "splash",
       height = screen_geometry.height,
-      width = screen_geometry.width
+      width = screen_geometry.width,
+      bg = "#00000080"
    }
 )
 
