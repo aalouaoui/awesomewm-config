@@ -6,6 +6,10 @@ fi
 
 # If nm-applet is running it means autostart script has already ran
 # and we don't need to rerun the same apps again
+if [[ -z $(pidof picom) ]]; then
+    picom --experimental-backends --config $HOME/.config/awesome/config/picom.conf &
+fi
+
 if [[ -n $(pidof nm-applet) ]]; then
     exit
 fi
