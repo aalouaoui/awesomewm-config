@@ -14,10 +14,11 @@ if [[ -n $(pidof nm-applet) ]]; then
     exit
 fi
 
+blueman-applet &
 nm-applet --indicator &
 xfce4-power-manager &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg &
-blueman-applet &
 volumeicon &
 udiskie -ant &
+bluetooth off &
