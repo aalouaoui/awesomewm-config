@@ -169,6 +169,15 @@ client.connect_signal(
 )
 -- }}}
 
+-- Autostart Apps
+awesome.connect_signal(
+    "startup",
+    function()
+        local script = gears.filesystem.get_configuration_dir() .. "/config/autostart.sh"
+        awful.spawn.with_shell(script)
+    end
+)
+
 -- ===================================================================
 -- Garbage collection (allows for lower memory consumption)
 -- ===================================================================
