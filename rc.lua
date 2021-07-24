@@ -53,8 +53,19 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- {{{ Wibar
 awful.screen.connect_for_each_screen(
     function(s)
-        -- Each screen has its own tag table.
-        awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
+        for i = 1, 9, 1 do
+            awful.tag.add(
+                i,
+                {
+                    icon = gears.filesystem.get_configuration_dir() .. "/icons/tags/" .. i .. ".png",
+                    icon_only = true,
+                    layout = awful.layout.suit.max,
+                    screen = s,
+                    selected = i == 1
+                }
+            )
+        end
+
         set_wallpaper(s)
         top_panel.create(s)
     end
