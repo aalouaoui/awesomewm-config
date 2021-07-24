@@ -68,7 +68,7 @@ theme.notification_max_width = dpi(350)
 
 -- System Tray
 theme.bg_systray = theme.bg_normal
-theme.systray_icon_spacing = dpi(5)
+theme.systray_icon_spacing = dpi(0)
 
 -- Titlebars
 theme.titlebars_enabled = false
