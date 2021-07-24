@@ -81,6 +81,79 @@ keys.globalkeys =
             menubar.show()
         end,
         {description = "show the menubar", group = "launcher"}
+    ),
+    -- =========================================
+    -- FUNCTION KEYS
+    -- =========================================
+
+    -- Brightness
+    awful.key(
+        {},
+        "XF86MonBrightnessUp",
+        function()
+            awful.spawn("xbacklight -inc 10", false)
+        end,
+        {description = "+10% Brightness", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86MonBrightnessDown",
+        function()
+            awful.spawn("xbacklight -dec 10", false)
+        end,
+        {description = "-10% Brightness", group = "hotkeys"}
+    ),
+    -- ALSA volume control
+    awful.key(
+        {},
+        "XF86AudioRaiseVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 5%+", false)
+            awesome.emit_signal("volume_change")
+        end,
+        {description = "volume up", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioLowerVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 5%-", false)
+            awesome.emit_signal("volume_change")
+        end,
+        {description = "volume down", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioMute",
+        function()
+            awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+            awesome.emit_signal("volume_change")
+        end,
+        {description = "toggle mute", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioNext",
+        function()
+            awful.spawn("playerctl next", false)
+        end,
+        {description = "next music", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioPrev",
+        function()
+            awful.spawn("playerctl previous", false)
+        end,
+        {description = "previous music", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioPlay",
+        function()
+            awful.spawn("playerctl play-pause", false)
+        end,
+        {description = "play/pause music", group = "hotkeys"}
     )
 )
 
