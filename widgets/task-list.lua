@@ -9,24 +9,25 @@
 -- Initialization
 -- ===================================================================
 
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local clickable_container = require("widgets.clickable-container")
 
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local clickable_container = require('widgets.clickable-container')
-
-local dpi = require('beautiful').xresources.apply_dpi
+local dpi = require("beautiful").xresources.apply_dpi
 local capi = {button = button}
 local ICON_DIR = gears.filesystem.get_configuration_dir() .. "/icons/"
 
 -- define module table
 local task_list = {}
 
+local beautiful = require("beautiful")
+local xmargin = beautiful.xmargin
+local ymargin = beautiful.ymargin
 
 -- ===================================================================
 -- Functionality
 -- ===================================================================
-
 
 local function create_buttons(buttons, object)
    if buttons then
@@ -37,14 +38,16 @@ local function create_buttons(buttons, object)
          -- button object the user provided, but with the object as
          -- argument.
          local btn = capi.button {modifiers = b.modifiers, button = b.button}
-         btn:connect_signal('press',
+         btn:connect_signal(
+            "press",
             function()
-               b:emit_signal('press', object)
+               b:emit_signal("press", object)
             end
          )
-         btn:connect_signal('release',
+         btn:connect_signal(
+            "release",
             function()
-               b:emit_signal('release', object)
+               b:emit_signal("release", object)
             end
          )
          btns[#btns + 1] = btn
@@ -53,7 +56,6 @@ local function create_buttons(buttons, object)
       return btns
    end
 end
-
 
 local function list_update(w, buttons, label, data, objects)
    -- update the widgets, creating them if needed
@@ -67,24 +69,32 @@ local function list_update(w, buttons, label, data, objects)
          bgb = cache.bgb
          tbm = cache.tbm
          ibm = cache.ibm
-         tt  = cache.tt
+         tt = cache.tt
       else
-         local icondpi = 4
-         local sidedpi = 8
          ib = wibox.widget.imagebox()
          tb = wibox.widget.textbox()
-         cb = clickable_container(wibox.container.margin(wibox.widget.imagebox(ICON_DIR .. "close.svg"), dpi(6), dpi(6), dpi(6), dpi(6)))
+         cb =
+            clickable_container(
+            wibox.container.margin(wibox.widget.imagebox(ICON_DIR .. "close.svg"), dpi(6), dpi(6), dpi(6), dpi(6))
+         )
          cb.shape = gears.shape.circle
-         cbm = wibox.container.margin(cb, dpi(sidedpi), dpi(sidedpi), dpi(icondpi), dpi(icondpi)) -- 4, 8 ,12 ,12 -- close button
-         cbm:buttons(gears.table.join(awful.button({}, 1, nil,
-            function()
-               o.kill(o)
-            end
-         )))
+         cbm = wibox.container.margin(cb, xmargin, xmargin, ymargin, ymargin) -- 4, 8 ,12 ,12 -- close button
+         cbm:buttons(
+            gears.table.join(
+               awful.button(
+                  {},
+                  1,
+                  nil,
+                  function()
+                     o.kill(o)
+                  end
+               )
+            )
+         )
          bg_clickable = clickable_container()
          bgb = wibox.container.background()
          tbm = wibox.container.margin(tb, dpi(0), dpi(0))
-         ibm = wibox.container.margin(ib, dpi(sidedpi), dpi(sidedpi), dpi(icondpi), dpi(icondpi)) -- 12 is default top and bottom margin --app icon
+         ibm = wibox.container.margin(ib, xmargin, xmargin, ymargin, ymargin) -- 12 is default top and bottom margin --app icon
          l = wibox.layout.fixed.horizontal()
          ll = wibox.layout.fixed.horizontal()
 
@@ -102,12 +112,15 @@ local function list_update(w, buttons, label, data, objects)
          l:buttons(create_buttons(buttons, o))
 
          -- Tooltip to display whole title, if it was truncated
-         tt = awful.tooltip({
-            objects = {tb},
-            mode = 'outside',
-            align = 'bottom',
-            delay_show = 1,
-         })
+         tt =
+            awful.tooltip(
+            {
+               objects = {tb},
+               mode = "outside",
+               align = "bottom",
+               delay_show = 1
+            }
+         )
 
          data[o] = {
             ib = ib,
@@ -115,7 +128,7 @@ local function list_update(w, buttons, label, data, objects)
             bgb = bgb,
             tbm = tbm,
             ibm = ibm,
-            tt  = tt
+            tt = tt
          }
       end
 
@@ -123,33 +136,33 @@ local function list_update(w, buttons, label, data, objects)
       args = args or {}
 
       -- The text might be invalid, so use pcall.
-      if text == nil or text == '' then
+      if text == nil or text == "" then
          tbm:set_margins(0)
       else
-          -- truncate when title is too long
-         local text_only = text:match('>(.-)<')
+         -- truncate when title is too long
+         local text_only = text:match(">(.-)<")
          if (text_only:len() > 24) then
-            text = text:gsub('>(.-)<', '>' .. text_only:sub(1, 21) .. '...<')
+            text = text:gsub(">(.-)<", ">" .. text_only:sub(1, 21) .. "...<")
             tt:set_text(text_only)
             tt:add_to_object(tb)
          else
             tt:remove_from_object(tb)
          end
          if not tb:set_markup_silently(text) then
-            tb:set_markup('<i>&lt;Invalid text&gt;</i>')
+            tb:set_markup("<i>&lt;Invalid text&gt;</i>")
          end
       end
       bgb:set_bg(bg)
-      if type(bg_image) == 'function' then
+      if type(bg_image) == "function" then
          -- TODO: Why does this pass nil as an argument?
          bg_image = bg_image(tb, o, nil, objects, i)
       end
       bgb:set_bgimage(bg_image)
-         if icon then
-            ib.image = icon
-         else
-            ibm:set_margins(0)
-         end
+      if icon then
+         ib.image = icon
+      else
+         ibm:set_margins(0)
+      end
 
       bgb.shape = args.shape
       bgb.shape_border_width = args.shape_border_width
@@ -159,48 +172,54 @@ local function list_update(w, buttons, label, data, objects)
    end
 end
 
-
 -- ===================================================================
 -- Widget Creation
 -- ===================================================================
 
-
-local tasklist_buttons = awful.util.table.join(
-   awful.button({}, 1,
+local tasklist_buttons =
+   awful.util.table.join(
+   awful.button(
+      {},
+      1,
       function(c)
          if c == client.focus then
             c.minimized = true
          else
-           -- Without this, the following
-           -- :isvisible() makes no sense
-           c.minimized = false
-           if not c:isvisible() and c.first_tag then
-              c.first_tag:view_only()
-           end
-           -- This will also un-minimize
-           -- the client, if needed
-           client.focus = c
-           c:raise()
+            -- Without this, the following
+            -- :isvisible() makes no sense
+            c.minimized = false
+            if not c:isvisible() and c.first_tag then
+               c.first_tag:view_only()
+            end
+            -- This will also un-minimize
+            -- the client, if needed
+            client.focus = c
+            c:raise()
          end
       end
    ),
-   awful.button({}, 2,
+   awful.button(
+      {},
+      2,
       function(c)
          c.kill(c)
       end
    ),
-   awful.button({}, 4,
+   awful.button(
+      {},
+      4,
       function()
          awful.client.focus.byidx(1)
       end
    ),
-   awful.button({}, 5,
+   awful.button(
+      {},
+      5,
       function()
          awful.client.focus.byidx(-1)
       end
    )
 )
-
 
 task_list.create = function(s)
    return awful.widget.tasklist(

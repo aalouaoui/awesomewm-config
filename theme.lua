@@ -98,6 +98,9 @@ theme.titlebars_enabled = false
 theme.menu_height = dpi(15)
 theme.menu_width = dpi(100)
 
+theme.xmargin = dpi(8)
+theme.ymargin = dpi(4)
+
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
