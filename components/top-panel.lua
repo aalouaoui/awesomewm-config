@@ -26,8 +26,8 @@ top_panel.create = function(s)
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            require("widgets.layoutbox").create(s),
-            wibox.widget.textclock()
+            wibox.widget.textclock(),
+            require("widgets.layoutbox").create(s)
         }
     }
 end

@@ -1,10 +1,14 @@
 local gears = require("gears")
 local awful = require("awful")
+local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
 
 local layoutbox = {}
 
 layoutbox.create = function(s)
-    local mylayoutbox = awful.widget.layoutbox(s)
+    local icondpi = 4
+    local mylayoutbox =
+        wibox.container.margin(awful.widget.layoutbox(s), dpi(icondpi), dpi(icondpi), dpi(icondpi), dpi(icondpi))
     mylayoutbox:buttons(
         gears.table.join(
             awful.button(
