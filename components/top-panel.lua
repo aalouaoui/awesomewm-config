@@ -1,13 +1,13 @@
-local gears = require("gears")
 local awful = require("awful")
 -- Widget and layout library
 local wibox = require("wibox")
+local beautiful = require("beautiful")
 
 local top_panel = {}
 
 top_panel.create = function(s)
     -- Create the wibox
-    s.mywibox = awful.wibar({position = "top", screen = s})
+    s.mywibox = awful.wibar({position = "top", screen = s, height = beautiful.top_panel_height})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -15,7 +15,7 @@ top_panel.create = function(s)
         {
             -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            require("widgets.taglist").create(s)
+            require("widgets.tag-list").create(s)
         },
         {
             -- Middle widget
