@@ -27,6 +27,8 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
 filemanager = "thunar"
+browser = "firefox"
+ide = "code"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {

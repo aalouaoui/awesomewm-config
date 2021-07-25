@@ -19,6 +19,12 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local function switch_launch(cmd, tag)
+    local tag = awful.tag.find_by_name(awful.screen.focused(), tag)
+    tag:view_only()
+    awful.spawn(cmd, {tag = tag.name})
+end
+
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 keys.mouseButtons = gears.table.join(awful.button({}, 4, awful.tag.viewprev), awful.button({}, 5, awful.tag.viewnext))
@@ -50,9 +56,25 @@ keys.globalkeys =
         {modkey},
         "e",
         function()
-            awful.spawn(filemanager)
+            switch_launch(filemanager, "4")
         end,
         {description = "open a file manager", group = "launcher"}
+    ),
+    awful.key(
+        {modkey},
+        "b",
+        function()
+            switch_launch(browser, "2")
+        end,
+        {description = "open a browser", group = "launcher"}
+    ),
+    awful.key(
+        {modkey},
+        "c",
+        function()
+            switch_launch(ide, "3")
+        end,
+        {description = "open an IDE", group = "launcher"}
     ),
     awful.key(
         {modkey},
@@ -208,6 +230,7 @@ for i = 1, 9 do
                     local tag = client.focus.screen.tags[i]
                     if tag then
                         client.focus:move_to_tag(tag)
+                        tag:view_only()
                     end
                 end
             end,
