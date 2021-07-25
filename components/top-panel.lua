@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
 local top_panel = {}
 
@@ -28,6 +29,14 @@ top_panel.create = function(s)
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+            wibox.container.margin(
+                volume_widget {
+                    widget_type = "icon_and_text",
+                    font = beautiful.font
+                },
+                beautiful.xmargin,
+                beautiful.xmargin
+            ),
             wibox.container.margin(
                 brightness_widget {
                     type = "icon_and_text",
