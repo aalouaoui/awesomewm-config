@@ -3,6 +3,8 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+
 local top_panel = {}
 
 top_panel.create = function(s)
@@ -26,6 +28,17 @@ top_panel.create = function(s)
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+            wibox.container.margin(
+                brightness_widget {
+                    type = "icon_and_text",
+                    program = "xbacklight",
+                    step = 5,
+                    base = 100,
+                    font = beautiful.font
+                },
+                beautiful.xmargin,
+                beautiful.xmargin
+            ),
             wibox.widget.textclock(),
             require("widgets.layoutbox").create(s)
         }
