@@ -31,7 +31,7 @@ top_panel.create = function(s)
             wibox.widget.systray(),
             wibox.container.margin(
                 volume_widget {
-                    widget_type = "icon",
+                    widget_type = "icon_and_text",
                     font = beautiful.font
                 },
                 beautiful.xmargin,

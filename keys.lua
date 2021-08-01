@@ -118,8 +118,24 @@ keys.globalkeys =
         {description = "+10% Brightness", group = "hotkeys"}
     ),
     awful.key(
+        {modkey, ctrlkey},
+        "Up",
+        function()
+            awful.spawn("xbacklight -inc 10", false)
+        end,
+        {description = "+10% Brightness", group = "hotkeys"}
+    ),
+    awful.key(
         {},
         "XF86MonBrightnessDown",
+        function()
+            awful.spawn("xbacklight -dec 10", false)
+        end,
+        {description = "-10% Brightness", group = "hotkeys"}
+    ),
+    awful.key(
+        {modkey, ctrlkey},
+        "Down",
         function()
             awful.spawn("xbacklight -dec 10", false)
         end,
@@ -136,8 +152,26 @@ keys.globalkeys =
         {description = "volume up", group = "hotkeys"}
     ),
     awful.key(
+        {modkey, ctrlkey},
+        "Right",
+        function()
+            awful.spawn("amixer -D pulse sset Master 5%+", false)
+            awesome.emit_signal("volume_change")
+        end,
+        {description = "volume up", group = "hotkeys"}
+    ),
+    awful.key(
         {},
         "XF86AudioLowerVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 5%-", false)
+            awesome.emit_signal("volume_change")
+        end,
+        {description = "volume down", group = "hotkeys"}
+    ),
+    awful.key(
+        {modkey, ctrlkey},
+        "Left",
         function()
             awful.spawn("amixer -D pulse sset Master 5%-", false)
             awesome.emit_signal("volume_change")
@@ -162,6 +196,14 @@ keys.globalkeys =
         {description = "next music", group = "hotkeys"}
     ),
     awful.key(
+        {modkey, shiftkey},
+        "Right",
+        function()
+            awful.spawn("playerctl next", false)
+        end,
+        {description = "next music", group = "hotkeys"}
+    ),
+    awful.key(
         {},
         "XF86AudioPrev",
         function()
@@ -170,8 +212,24 @@ keys.globalkeys =
         {description = "previous music", group = "hotkeys"}
     ),
     awful.key(
+        {modkey, shiftkey},
+        "Left",
+        function()
+            awful.spawn("playerctl previous", false)
+        end,
+        {description = "previous music", group = "hotkeys"}
+    ),
+    awful.key(
         {},
         "XF86AudioPlay",
+        function()
+            awful.spawn("playerctl play-pause", false)
+        end,
+        {description = "play/pause music", group = "hotkeys"}
+    ),
+    awful.key(
+        {modkey, shiftkey},
+        "Down",
         function()
             awful.spawn("playerctl play-pause", false)
         end,
