@@ -32,8 +32,8 @@ theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#ffffff"
 
 -- Window Gap Distance
-theme.useless_gap = dpi(0)
-theme.gap_single_client = true
+theme.useless_gap = dpi(1)
+theme.gap_single_client = false
 
 -- Window Borders
 theme.border_width = dpi(0)
