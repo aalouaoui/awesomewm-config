@@ -28,6 +28,7 @@ top_panel.create = function(s)
         {
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            awful.widget.keyboardlayout(),
             wibox.widget.systray(),
             wibox.container.margin(
                 volume_widget {

@@ -10,6 +10,8 @@ if [[ -n $(pidof nm-applet) ]]; then
     exit
 fi
 
+# change keyboard layout
+setxkbmap -layout "us,ar"
 # prevent screen from turning off while not using keyboard and mouse
 xset s off -dpms 
 blueman-applet &
