@@ -55,7 +55,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- {{{ Wibar
 awful.screen.connect_for_each_screen(
     function(s)
-        for i = 1, 9, 1 do
+        for i = 1, 6, 1 do
             awful.tag.add(
                 i,
                 {
