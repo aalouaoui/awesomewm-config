@@ -15,6 +15,8 @@ setxkbmap -layout "us,ar"
 # prevent screen from turning off while not using keyboard and mouse
 xset s off -dpms 
 blueman-applet &
+# Clipboard Manager
+parcellite &
 nm-applet --indicator &
 # xfce4-power-manager &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

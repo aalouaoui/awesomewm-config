@@ -24,7 +24,7 @@ local top_panel = require("components.top-panel")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "wezterm"
 editor = os.getenv("EDITOR") or "nvim"
 filemanager = "thunar"
 browser = "firefox"
@@ -95,6 +95,11 @@ awful.rules.rules = {
             placement = awful.placement.no_overlap + awful.placement.no_offscreen
         }
     },
+    -- { rule_any = {floating = true},
+        -- properties = {
+            -- placement = awful.placement.centered
+        -- }
+    -- },
     -- Floating clients.
     {
         rule_any = {
@@ -163,12 +168,12 @@ client.connect_signal(
 )
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal(
-    "mouse::enter",
-    function(c)
-        c:emit_signal("request::activate", "mouse_enter", {raise = false})
-    end
-)
+-- client.connect_signal(
+    -- "mouse::enter",
+    -- function(c)
+        -- c:emit_signal("request::activate", "mouse_enter", {raise = false})
+    -- end
+-- )
 
 client.connect_signal(
     "focus",
